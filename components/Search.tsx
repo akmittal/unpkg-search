@@ -10,8 +10,6 @@ interface Props {
 }
 
 export default function Search({value, onChange, onSubmit}: Props): ReactElement {
-  const [query, setQuery] = useState<string>(value);
-
   return (
     <InputGroup size="lg">
       <Input
@@ -33,7 +31,7 @@ export default function Search({value, onChange, onSubmit}: Props): ReactElement
           onClick={() => {
            onSubmit()
           }}
-          colorScheme="blue"
+          colorScheme="purple"
         >
           Go
         </Button>

@@ -1,8 +1,10 @@
 import "../styles/globals.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 
 import { useRef } from "react";
+import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
+import Navbar from "../components/Navbar";
 
 const colors = {
   brand: {
@@ -17,6 +19,8 @@ function MyApp({ Component, pageProps }) {
   return (
     
         <ChakraProvider theme={theme}>
+          <Navbar />
+          <Flex justifyContent="flex-end"><ColorModeSwitcher /></Flex>
           <Component {...pageProps} />
         </ChakraProvider>
   );

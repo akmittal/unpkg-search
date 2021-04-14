@@ -15,11 +15,9 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>UNPKG Search</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
-      <header>
-        <Heading>UNPKG Search</Heading>
-      </header>
+      
 
       <main className={styles.main}>
         <Search
@@ -27,12 +25,10 @@ export default function Home() {
           value={search}
           onChange={(value) => {
             setSearch(value);
-          
           }}
         />
       </main>
 
-      <footer className={styles.footer}></footer>
     </div>
   );
 }
