@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { ChakraProvider, Flex } from "@chakra-ui/react";
+import { ChakraProvider, ColorMode, Flex } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 
 import { useRef } from "react";
