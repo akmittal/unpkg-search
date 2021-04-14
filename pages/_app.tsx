@@ -5,6 +5,12 @@ import { extendTheme } from "@chakra-ui/react";
 import { useRef } from "react";
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
 import Navbar from "../components/Navbar";
+const defaultMode:ColorMode = "dark"
+
+const config = {
+  initialColorMode: defaultMode,
+  useSystemColorMode: false,
+}
 
 const colors = {
   brand: {
@@ -13,7 +19,7 @@ const colors = {
     700: "#2a69ac",
   },
 };
-const theme = extendTheme({ colors });
+const theme = extendTheme({ colors, config });
 
 function MyApp({ Component, pageProps }) {
   return (
