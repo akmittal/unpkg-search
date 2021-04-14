@@ -16,6 +16,8 @@ export default function Home() {
       <Head>
         <title>UNPKG Search</title>
         <link rel="icon" href="/favicon.png" />
+        <meta name="description" content="Search for cdn URL from unpkg CDN" />
+        <meta name="keywords" content="unpkg, search, cdn, npm, github, package search,unpkh search" />
       </Head>
       
 

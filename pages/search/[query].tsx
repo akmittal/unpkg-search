@@ -21,6 +21,7 @@ export default function Query({ data }: Props) {
       <Head>
         <title>UNPKG Search: {query} </title>
         <link rel="icon" href="/favicon.png" />
+        <meta name="description" content="UNPKG package Search" />
       </Head>
       <Box m="4" w="lg">
         <Search
