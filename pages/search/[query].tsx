@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/layout";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchResult from "../../components/SearchResult";
 import Search from "./../../components/Search";
 
@@ -15,7 +15,12 @@ export default function Query({ data }: Props) {
   let { query } = router.query;
   query = Array.isArray(query) ? query[0] : query;
   const [search, setSearch] = useState<string>(query);
-  
+  useEffect(() => {
+    let { query } = router.query;
+    query = Array.isArray(query) ? query[0] : query;
+    setSearch(query);
+  }, [router.query]);
+
   return (
     <div>
       <Head>
@@ -27,10 +32,12 @@ export default function Query({ data }: Props) {
         <Search
           value={search}
           onChange={(value) => setSearch(value)}
-          onSubmit={() => router.push(`/search/${search}`)}
+          onSubmit={() =>
+            router.push(`/search/${search}`, undefined, { shallow: true })
+          }
         />
       </Box>
-    
+
       {Array.from(data.results).map((datum: any) => {
         const {
           name,
