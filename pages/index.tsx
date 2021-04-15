@@ -23,7 +23,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <Search
-        onSubmit={() =>   router.push(`/search/${search}`)}
+        onSubmit={() =>   router.push(`/search/${search}`, undefined, {shallow:true})}
           value={search}
           onChange={(value) => {
             setSearch(value);
