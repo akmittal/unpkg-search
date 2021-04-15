@@ -2,15 +2,16 @@ import "../styles/globals.css";
 import { ChakraProvider, ColorMode, Flex } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
 
-import { useRef } from "react";
+import Head from "next/head";
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
 import Navbar from "../components/Navbar";
-const defaultMode:ColorMode = "dark"
+
+const defaultMode: ColorMode = "dark";
 
 const config = {
   initialColorMode: defaultMode,
   useSystemColorMode: false,
-}
+};
 
 const colors = {
   brand: {
@@ -23,12 +24,30 @@ const theme = extendTheme({ colors, config });
 
 function MyApp({ Component, pageProps }) {
   return (
-    
-        <ChakraProvider theme={theme}>
-          <Navbar />
-          <Flex justifyContent="flex-end"><ColorModeSwitcher /></Flex>
-          <Component {...pageProps} />
-        </ChakraProvider>
+    <ChakraProvider theme={theme}>
+      <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-4VP66JXRFK"
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4VP66JXRFK');
+        `,
+          }}
+        />
+      </Head>
+      <Navbar />
+      <Flex justifyContent="flex-end">
+        <ColorModeSwitcher />
+      </Flex>
+      <Component {...pageProps} />
+    </ChakraProvider>
   );
 }
 
