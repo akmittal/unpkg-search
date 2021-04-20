@@ -33,7 +33,7 @@ export default function Query({ data }: Props) {
           value={search}
           onChange={(value) => setSearch(value)}
           onSubmit={() =>
-            router.push(`/search/${search}`, undefined, { shallow: true })
+            router.push(`/search/${search}`, undefined, { shallow: true,  })
           }
         />
       </Box>
