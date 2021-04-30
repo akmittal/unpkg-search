@@ -1,6 +1,3 @@
-import { Button } from "@chakra-ui/button";
-import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
-import { Heading } from "@chakra-ui/layout";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";

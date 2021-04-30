@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement } from "react";
 
 interface Props {
  value:string;
