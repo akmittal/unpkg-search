@@ -41,7 +41,7 @@ export default function SearchResult({
          
           <Box>
           <strong>v{version} URL: </strong>
-            <ChakraLink href={cdnLink} target="_blank" px="1">
+            <ChakraLink href={cdnLink} target="_blank" px="1" rel="noopener">
               { cdnLink}
             </ChakraLink>
             <IconButton
@@ -53,7 +53,7 @@ export default function SearchResult({
             />
           </Box>
           <Box my="2">
-          <a href={`https://unpkg.com/${name}/`} target="_blank" >
+          <a href={`https://unpkg.com/${name}/`} target="_blank" rel="noopener" >
             <Button colorScheme="purple">Browse Files</Button>
           </a>
         </Box>
