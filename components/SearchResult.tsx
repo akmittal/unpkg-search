@@ -60,6 +60,7 @@ export default function SearchResult({
 
           {keywords?.map((item) => (
             <Link href={`/search/keywords:${item}`}>
+              <a>
               <Badge
                 colorScheme="purple"
                 p="1"
@@ -69,6 +70,7 @@ export default function SearchResult({
               >
                 {item}
               </Badge>
+              </a>
             </Link>
           ))}
         </Box>
