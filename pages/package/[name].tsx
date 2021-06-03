@@ -1,15 +1,8 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  Link,
-  VStack,
-} from "@chakra-ui/layout";
+import { Box, Flex, Heading, HStack, Link, VStack } from "@chakra-ui/layout";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import {  useState } from "react";
+import { useState } from "react";
 import Search from "./../../components/Search";
 import { Select } from "@chakra-ui/select";
 import Keyword from "../../components/Keyword";
@@ -34,7 +27,7 @@ export default function Query({ data }: Props) {
       <Head>
         <title>UNPKG: {name} CDN urls</title>
         <link rel="icon" href="/favicon.png" />
-        <meta name="description" content={`UNPKG search ${name}` }/>
+        <meta name="description" content={`UNPKG search ${name}`} />
       </Head>
       <Box m="4" w="lg">
         <Search
@@ -64,16 +57,27 @@ export default function Query({ data }: Props) {
           </Select>
         </Flex>
         <VStack alignItems="flex-start">
-          {data.versions[version].main && <AssetMeta data={data} type="main" version={version} />}
-          {data.versions[version].style && <AssetMeta data={data} type="style" version={version} />}
-          {data.versions[version].module && <AssetMeta data={data} type="module" version={version} />}
+          {data.versions[version].main && (
+            <AssetMeta data={data} type="main" version={version} />
+          )}
+          {data.versions[version].style && (
+            <AssetMeta data={data} type="style" version={version} />
+          )}
+          {data.versions[version].module && (
+            <AssetMeta data={data} type="module" version={version} />
+          )}
         </VStack>
-        <Flex>
+        <Flex flexWrap="wrap">
           {data.versions[version].keywords?.map((item) => (
             <Keyword item={item} />
           ))}
         </Flex>
-        <a href={`https://unpkg.com/browse/${name}@${version}/`}  target="_blank"><Button colorScheme="purple">Browse Package on UNPKG</Button></a>
+        <a
+          href={`https://unpkg.com/browse/${name}@${version}/`}
+          target="_blank"
+        >
+          <Button colorScheme="purple">Browse Package on UNPKG</Button>
+        </a>
       </VStack>
     </div>
   );
@@ -83,12 +87,19 @@ function AssetMeta({ type, data, version }) {
   const [tooptipOpen, setTooltipOpen] = useState(false);
   return (
     <HStack>
-      <Flex gridGap="2" alignItems="center">
+      <Flex gridGap="2" alignItems="center" flexWrap="wrap">
         <strong>{type}:</strong>{" "}
-        <Link href={getVersionURL(data, version, type)} target="_blank" backgroundColor="rgba(0,0,0,0.2)" px="2" borderRadius="5" py="1" >
+        <Flex><Link
+          href={getVersionURL(data, version, type)}
+          target="_blank"
+          backgroundColor="rgba(0,0,0,0.2)"
+          px="2"
+          borderRadius="5"
+          py="1"
+        >
           {getVersionURL(data, version, type)}
         </Link>
-      </Flex>
+     
       <Tooltip label="copied" isOpen={tooptipOpen}>
         <Button
           leftIcon={<MdContentCopy />}
@@ -98,13 +109,15 @@ function AssetMeta({ type, data, version }) {
             copyToClipboard(getVersionURL(data, version, type));
             setTooltipOpen(true);
             setTimeout(() => {
-                setTooltipOpen(false)
-            }, 600)
+              setTooltipOpen(false);
+            }, 600);
           }}
         >
           Copy URL
         </Button>
-      </Tooltip>
+        
+      </Tooltip></Flex>
+      </Flex>
     </HStack>
   );
 }
