@@ -1,9 +1,11 @@
-import { Badge, Box, Flex, Heading } from "@chakra-ui/layout";
-import React, { ReactElement } from "react";
+import { Box, Flex, Heading } from "@chakra-ui/layout";
+import React, { ReactElement, useState } from "react";
 import Link from "next/link";
 import { Button, IconButton } from "@chakra-ui/button";
 import { CopyIcon } from "@chakra-ui/icons";
-import {Link as ChakraLink} from "@chakra-ui/react"
+import { Link as ChakraLink, Tooltip } from "@chakra-ui/react";
+import Keyword from "./Keyword";
+import { copyToClipboard } from "../util";
 
 interface Props {
   name: string;
@@ -32,62 +34,55 @@ export default function SearchResult({
   keywords,
   cdnLink,
 }: Props): ReactElement {
+  const [tooltipOpen, setTooltipOpen] = useState(false)
   return (
     <Box p="5" borderBottom="1px" borderColor="whiteAlpha.400" m="2">
       <Flex alignItems="center" justifyContent="space-between">
         <Box>
-          <Heading size="lg">{name}</Heading>
-          <Heading size="xs">{description}</Heading>
-         
-          <Box>
-          <strong>v{version} URL: </strong>
-            <ChakraLink href={cdnLink} target="_blank" px="1" rel="noopener">
-              { cdnLink}
+          <Link href={`/package/${encodeURIComponent(name)}`}>
+            <ChakraLink>
+              <Heading size="lg">{name}</Heading>
             </ChakraLink>
+          </Link>
+          <Heading size="xs">{description}</Heading>
+
+          <Box>
+            <strong>v{version} URL: </strong>
+            <ChakraLink href={cdnLink} target="_blank" px="1" rel="noopener">
+              {cdnLink}
+            </ChakraLink>
+            <Tooltip label="copied" isOpen={tooltipOpen}>
             <IconButton
               mx="2"
               aria-label="Copy CDN path"
               title="Copy CDN Path"
               icon={<CopyIcon />}
-              onClick={() => copyToClipboard(cdnLink)}
+              onClick={() => { copyToClipboard(cdnLink);
+              setTooltipOpen(true);
+              setTimeout(() => {
+                setTooltipOpen(false)
+              }, 500)
+              }}
             />
+           </Tooltip>
           </Box>
-          <Box my="2">
-          <a href={`https://unpkg.com/${name}/`} target="_blank" rel="noopener" >
-            <Button colorScheme="purple">Browse Files</Button>
-          </a>
-        </Box>
+          <Flex my="2" gridGap="2">
+          <Link href={`/package/${name}`}><ChakraLink><Button colorScheme="purple">Open</Button></ChakraLink></Link>
+            <a
+              href={`https://unpkg.com/${encodeURIComponent(name)}/`}
+              target="_blank"
+              rel="noopener"
+            >
+              
+              <Button colorScheme="purple">Browse Files</Button>
+            </a>
+          </Flex>
 
           {keywords?.map((item) => (
-            <Link href={`/search/keywords:${item}`}>
-              <a>
-              <Badge
-                colorScheme="purple"
-                p="1"
-                m="1"
-                borderRadius="10"
-                cursor="pointer"
-              >
-                {item}
-              </Badge>
-              </a>
-            </Link>
+            <Keyword item={item} />
           ))}
         </Box>
-        
       </Flex>
     </Box>
   );
 }
-
-const copyToClipboard = (str) => {
-  const el = document.createElement("textarea");
-  el.value = str;
-  el.setAttribute("readonly", "");
-  el.style.position = "absolute";
-  el.style.left = "-9999px";
-  document.body.appendChild(el);
-  el.select();
-  document.execCommand("copy");
-  document.body.removeChild(el);
-};
