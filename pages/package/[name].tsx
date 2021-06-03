@@ -29,7 +29,7 @@ export default function Query({ data }: Props) {
         <link rel="icon" href="/favicon.png" />
         <meta name="description" content={`UNPKG search ${name}`} />
       </Head>
-      <Box m="4" w="lg">
+      <Box m="4" w="lg" width="calc(100% - 30px)">
         <Search
           value={search}
           onChange={(value) => setSearch(value)}
@@ -89,7 +89,7 @@ function AssetMeta({ type, data, version }) {
     <HStack>
       <Flex gridGap="2" alignItems="center" flexWrap="wrap">
         <strong>{type}:</strong>{" "}
-        <Flex><Link
+        <Flex overflow="scroll" width="full"><Link
           href={getVersionURL(data, version, type)}
           target="_blank"
           backgroundColor="rgba(0,0,0,0.2)"
@@ -99,7 +99,7 @@ function AssetMeta({ type, data, version }) {
         >
           {getVersionURL(data, version, type)}
         </Link>
-     
+        </Flex>
       <Tooltip label="copied" isOpen={tooptipOpen}>
         <Button
           leftIcon={<MdContentCopy />}
@@ -116,7 +116,7 @@ function AssetMeta({ type, data, version }) {
           Copy URL
         </Button>
         
-      </Tooltip></Flex>
+      </Tooltip>
       </Flex>
     </HStack>
   );

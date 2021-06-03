@@ -28,7 +28,7 @@ export default function Query({ data }: Props) {
         <link rel="icon" href="/favicon.png" />
         <meta name="description" content="UNPKG package Search" />
       </Head>
-      <Box m="4" w="lg">
+      <Box m="4" w="calc(100% - 30px)" >
         <Search
           value={search}
           onChange={(value) => setSearch(value)}
