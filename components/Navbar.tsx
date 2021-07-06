@@ -10,8 +10,9 @@ export default function Navbar(): ReactElement {
         <Flex p="2" justifyContent="center" width="full" cursor="pointer">
           <Image
             src="/logo.png"
-            width="400px"
-            height="auto"
+            width="500px"
+            height="200px"
+            objectFit="contain"
             alt="unpkg search Logo"
           />
         </Flex>

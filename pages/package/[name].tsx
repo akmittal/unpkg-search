@@ -10,15 +10,19 @@ import { Button } from "@chakra-ui/button";
 import { MdContentCopy, MdCall } from "react-icons/md";
 import { copyToClipboard } from "../../util";
 import { Tooltip } from "@chakra-ui/tooltip";
+import { useQuery } from "react-query";
 
 interface Props {
   data: any;
 }
 
-export default function Query({ data }: Props) {
+export default function Query({ data:initialData }: Props) {
+ 
   const router = useRouter();
   let { name } = router.query;
+  
   name = Array.isArray(name) ? name[0] : name;
+  const { data } = useQuery('posts', getPackageInfo.bind(this,name ), { initialData })
   const [search, setSearch] = useState<string>();
   const [version, setVersion] = useState(data["dist-tags"].latest);
 
