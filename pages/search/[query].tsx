@@ -72,7 +72,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const res = await fetch(`https://registry.npmjs.com/-/v1/search?text=${query}&size=5`);
   const json = await res.json();
   const pathPromises = [];
-  console.log({json})
   for (const result of json.objects) {
     pathPromises.push(getPackagePath(result.package.name));
   }
@@ -87,9 +86,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 async function getPackagePath(packagename: string) {
+ 
   const res = await fetch(`https://unpkg.com/${packagename}`, {
     redirect: "follow",
     method: "HEAD",
   });
+ 
   return res.url;
 }
