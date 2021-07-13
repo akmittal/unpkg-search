@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function Navbar(): ReactElement {
   return (
     <Flex>
-      <Link href="/" >
+      <Link href="/" passHref={true} >
         <Flex p="2" justifyContent="center" width="full" cursor="pointer">
           <Image
             src="/logo.png"

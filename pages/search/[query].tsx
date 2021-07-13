@@ -51,6 +51,7 @@ export default function Query({ data }: Props) {
         } = datum.package;
         return (
           <SearchResult
+          key={name}
             cdnLink={cdnLink}
             name={name}
             description={description}

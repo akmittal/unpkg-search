@@ -8,7 +8,7 @@ interface Props {
 
 export default function Keyword({ item }: Props): ReactElement {
   return (
-    <Link href={`/search/keywords:${item}`}>
+    <Link href={`/search/keywords:${item}`} passHref={true}>
       <a>
         <Badge
           colorScheme="purple"

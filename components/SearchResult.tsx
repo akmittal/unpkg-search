@@ -39,7 +39,7 @@ export default function SearchResult({
     <Box p="5" borderBottom="1px" borderColor="whiteAlpha.400" m="2">
       <Flex alignItems="center" justifyContent="space-between">
         <Box>
-          <Link href={`/package/${encodeURIComponent(name)}`}>
+          <Link href={`/package/${encodeURIComponent(name)}`} passHref={true}>
             <ChakraLink>
               <Heading size="lg">{name}</Heading>
             </ChakraLink>
@@ -67,7 +67,7 @@ export default function SearchResult({
            </Tooltip>
           </Box>
           <Flex my="2" gridGap="2">
-          <Link href={`/package/${name}`}><ChakraLink><Button colorScheme="purple">Open</Button></ChakraLink></Link>
+          <Link passHref={true} href={`/package/${name}`}><ChakraLink><Button colorScheme="purple">Open</Button></ChakraLink></Link>
             <a
               href={`https://unpkg.com/${encodeURIComponent(name)}/`}
               target="_blank"

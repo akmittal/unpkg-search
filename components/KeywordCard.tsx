@@ -17,7 +17,7 @@ export default function KeywordCard({
 }: Props): ReactElement {
   return (
     <Flex flex="1 0 40%" justifyContent="space-around">
-    <Link href={`/search/keywords:${keyword}`}>
+    <Link href={`/search/keywords:${keyword}`} passHref={true}>
       <a>
       <Flex p="4" border="1px solid #444" borderRadius="2" cursor="pointer" gridGap="2" _hover={{"background":"rgba(144,122,239,0.4)"}}>
         <Icon as={icon}></Icon>
