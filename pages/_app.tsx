@@ -4,7 +4,7 @@ import { extendTheme } from "@chakra-ui/react";
 import Router from "next/router";
 import NProgress from "nprogress"; //nprogress module
 import "nprogress/nprogress.css"; //styles of nprogress
-
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 import Head from "next/head";
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
 import Navbar from "../components/Navbar";
@@ -24,7 +24,7 @@ const colors = {
   },
 };
 const theme = extendTheme({ colors, config });
-
+const queryClient = new QueryClient()
 //Binding events.
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -32,6 +32,7 @@ Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
   return (
+    <QueryClientProvider client={queryClient}>
     <ChakraProvider theme={theme}>
       <Head>
         <script
@@ -56,6 +57,8 @@ function MyApp({ Component, pageProps }) {
       </Flex>
       <Component {...pageProps} />
     </ChakraProvider>
+    </QueryClientProvider>
+
   );
 }
 

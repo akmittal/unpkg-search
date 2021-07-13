@@ -38,7 +38,7 @@ export default function Query({ data }: Props) {
         />
       </Box>
 
-      {Array.from(data.results).map((datum: any) => {
+      {Array.from(data.objects).map((datum: any) => {
         const {
           name,
           description,
@@ -69,16 +69,17 @@ export default function Query({ data }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context.params;
 
-  const res = await fetch(`https://api.npms.io/v2/search?q=${query}&size=10`);
+  const res = await fetch(`https://registry.npmjs.com/-/v1/search?text=${query}&size=5`);
   const json = await res.json();
   const pathPromises = [];
-  for (const result of json.results) {
+  console.log({json})
+  for (const result of json.objects) {
     pathPromises.push(getPackagePath(result.package.name));
   }
   const results = await Promise.all(pathPromises);
 
-  for (let i = 0; i < json.results.length; i++) {
-    json.results[i].package.cdnLink = results[i];
+  for (let i = 0; i < json.objects.length; i++) {
+    json.objects[i].package.cdnLink = results[i];
   }
   return {
     props: { data: json },
