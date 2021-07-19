@@ -70,7 +70,11 @@ export default function Query({ data }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context.params;
 
-  const res = await fetch(`https://registry.npmjs.com/-/v1/search?text=${query}&size=5`);
+  const res = await fetch(`https://registry.npmjs.com/-/v1/search?text=${query}&size=5`,{
+    headers:{
+      "accept-encoding":"gzip"
+    }
+  });
   const json = await res.json();
   const pathPromises = [];
   for (const result of json.objects) {
@@ -91,6 +95,9 @@ async function getPackagePath(packagename: string) {
   const res = await fetch(`https://unpkg.com/${packagename}`, {
     redirect: "follow",
     method: "HEAD",
+    headers:{
+      "accept-encoding":"gzip"
+    }
   });
  
   return res.url;

@@ -147,6 +147,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 async function getPackageInfo(packagename: string) {
   const res = await fetch(`https://registry.npmjs.com/${packagename}`, {
     method: "GET",
+    headers:{
+      "accept-encoding":"gzip"
+    }
+
   });
   return res.json();
 }
