@@ -152,5 +152,23 @@ async function getPackageInfo(packagename: string) {
     }
 
   });
-  return res.json();
+  const data =  await res.json();
+  for(const key in data.versions){
+    const versionInfo =   data.versions[key];
+    data.versions[key] = {
+      name: versionInfo.name||"",
+      description: versionInfo.description||"",
+      version: versionInfo.version||"",
+      main: versionInfo.main||"",
+      module: versionInfo.module||"",
+      style: versionInfo.style||""
+    }
+  }
+  delete data.maintainers
+  delete data.time
+  delete data.repository
+  delete data.users
+  delete data.bugs
+  console.log(data)
+  return data;
 }
