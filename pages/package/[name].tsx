@@ -8,7 +8,7 @@ import { Select } from "@chakra-ui/select";
 import Keyword from "../../components/Keyword";
 import { Button } from "@chakra-ui/button";
 import { MdContentCopy, MdCall } from "react-icons/md";
-import { copyToClipboard } from "../../util";
+import { copyToClipboard, host } from "../../util";
 import { Tooltip } from "@chakra-ui/tooltip";
 import { useQuery } from "react-query";
 
@@ -22,7 +22,7 @@ export default function Query({ data:initialData }: Props) {
   let { name } = router.query;
   
   name = Array.isArray(name) ? name[0] : name;
-  const { data } = useQuery('posts', getPackageInfo.bind(this,name ), { initialData })
+  const { data } = useQuery(['posts',name], getPackageInfo.bind(this,name ), { initialData })
   const [search, setSearch] = useState<string>();
   const [version, setVersion] = useState(data["dist-tags"].latest);
 
@@ -145,7 +145,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 async function getPackageInfo(packagename: string) {
-  const res = await fetch(`https://registry.npmjs.com/${packagename}`, {
+  const url = encodeURIComponent(`https://registry.npmjs.com/${packagename}`);
+  const res = await fetch(`${host}api/package?url=${url}`, {
     method: "GET",
     headers:{
       "accept-encoding":"gzip"
@@ -169,6 +170,6 @@ async function getPackageInfo(packagename: string) {
   delete data.repository
   delete data.users
   delete data.bugs
-  console.log(data)
+ 
   return data;
 }

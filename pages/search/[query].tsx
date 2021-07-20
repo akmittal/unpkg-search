@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import SearchResult from "../../components/SearchResult";
 import Search from "./../../components/Search";
+import { host } from "../../util";
 
 interface Props {
   data: any;
@@ -70,7 +71,7 @@ export default function Query({ data }: Props) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context.params;
 
-  const res = await fetch(`https://registry.npmjs.com/-/v1/search?text=${query}&size=5`,{
+  const res = await fetch(`${host}api/package?url=${encodeURIComponent(`https://registry.npmjs.com/-/v1/search?text=${query}&size=5`)}`,{
     headers:{
       "accept-encoding":"gzip"
     }
