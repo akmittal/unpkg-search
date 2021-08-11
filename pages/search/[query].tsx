@@ -20,6 +20,7 @@ export default function Query({ data }: Props) {
     let { query } = router.query;
     query = Array.isArray(query) ? query[0] : query;
     setSearch(query);
+   
   }, [router.query]);
 
   return (
@@ -34,7 +35,7 @@ export default function Query({ data }: Props) {
           value={search}
           onChange={(value) => setSearch(value)}
           onSubmit={() =>
-            router.push(`/search/${search}`, undefined, { shallow: true,  })
+            router.push(`/search/${search}`, undefined, { shallow: false,  })
           }
         />
       </Box>
