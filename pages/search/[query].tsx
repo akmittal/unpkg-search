@@ -71,6 +71,10 @@ export default function Query({ data }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context.params;
+  context.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=5000, stale-while-revalidate=5900'
+  )
 
   const res = await fetch(`${host}api/package?url=${encodeURIComponent(`https://registry.npmjs.com/-/v1/search?text=${query}&size=5`)}`,{
     headers:{

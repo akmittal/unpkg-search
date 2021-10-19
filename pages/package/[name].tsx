@@ -29,9 +29,11 @@ export default function Query({ data:initialData }: Props) {
   return (
     <div>
       <Head>
-        <title>UNPKG: {name} CDN urls</title>
+        <title>{name} - Best place to find CDN for developers</title>
         <link rel="icon" href="/favicon.png" />
-        <meta name="description" content={`UNPKG search ${name}`} />
+        <meta name="description" content={data.description} />
+        <meta name="theme-color" content="#d9643a"></meta>
+        <meta property="og:image" content="/logo.png"></meta>
       </Head>
       <Box m="4" w="lg" width="calc(100% - 30px)">
         <Search
@@ -135,6 +137,10 @@ function getVersionURL(data: any, version: string, type?: string) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   let { name } = context.params;
+  context.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=5000, stale-while-revalidate=5900'
+  )
   if (Array.isArray(name)) {
     name = name[0];
   }
