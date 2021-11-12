@@ -1,5 +1,5 @@
 import { Badge } from "@chakra-ui/layout";
-import Link from "next/link";
+import {Link} from "react-router-dom";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 export default function Keyword({ item }: Props): ReactElement {
   return (
-    <Link href={`/search/keywords:${item}`} passHref={true}>
+    <Link to={`/search/keywords:${item}`}>
       <a>
         <Badge
           colorScheme="purple"

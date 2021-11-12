@@ -1,11 +1,26 @@
 import { Flex, Heading } from "@chakra-ui/layout";
-import Head from "next/head";
-import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import KeywordCard from "../components/KeywordCard";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/home.css";
 import Search from "./../components/Search";
 import { FaCode, FaTerminal, FaCheck, FaMobile, FaRobot, FaSquare, FaCss3, FaServer, FaFile, FaNetworkWired, FaShieldAlt, FaCrop ,FaSquareRootAlt} from "react-icons/fa";
+import type { MetaFunction,LinksFunction } from "remix";
+
+
+export let links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: styles }];
+};
+
+
+
+export let meta: MetaFunction = () => {
+  return {
+    title: "UNPKG Search",
+    description: "Search for packages on UNPKG",
+    keywords: "unpkg search, unpkg, search, CDN, npm, github, package search,"
+  };
+};
 
 const discover = [
   { icon: FaCode, label: "Front End", keyword: "front-end" },
@@ -24,24 +39,16 @@ const discover = [
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const router = useRouter();
+  const navigate = useNavigate();
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>UNPKG Search</title>
-        <link rel="icon" href="/favicon.png" />
-        <meta name="description" content="Search for packages on UNPKG " />
-        <meta
-          name="keywords"
-          content="unpkg search, unpkg, search, CDN, npm, github, package search,"
-        />
-      </Head>
+    <div className="container">
+     
 
-      <main className={styles.main}>
+      <main className="main">
         <Search
           onSubmit={() =>
-            router.push(`/search/${search}`, undefined, { shallow: false })
+            navigate(`/search/${search}`)
           }
           value={search}
           onChange={(value) => {
