@@ -1,11 +1,11 @@
-import { Box, Flex, Heading } from "@chakra-ui/layout";
-import React, { ReactElement, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, IconButton } from "@chakra-ui/button";
-import { CopyIcon } from "@chakra-ui/icons";
-import { Link as ChakraLink, Tooltip } from "@chakra-ui/react";
-import Keyword from "./Keyword";
-import { copyToClipboard } from "../../util";
+import { Box, Flex, Heading } from '@chakra-ui/layout';
+import { ReactElement, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button, IconButton } from '@chakra-ui/button';
+import { CopyIcon } from '@chakra-ui/icons';
+import { Link as ChakraLink, Tooltip } from '@chakra-ui/react';
+import Keyword from './Keyword';
+import { copyToClipboard } from '../../util';
 
 interface Props {
   name: string;
@@ -47,7 +47,13 @@ export default function SearchResult({
           <Heading size="xs">{description}</Heading>
 
           <Box>
-            <strong>v{version} URL: </strong>
+            <strong>
+              v
+              {version}
+              {' '}
+              URL:
+              {' '}
+            </strong>
             <ChakraLink href={cdnLink} target="_blank" px="1" rel="noopener">
               {cdnLink}
             </ChakraLink>
@@ -69,14 +75,14 @@ export default function SearchResult({
           </Box>
           <Flex my="2" gridGap="2">
             <Link to={`/package/${name}`}>
-             
-                <Button as="a" colorScheme="purple">Open</Button>
-            
+              <Button as="a" colorScheme="purple">
+                Open
+              </Button>
             </Link>
             <a
               href={`https://unpkg.com/${encodeURIComponent(name)}/`}
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               <Button colorScheme="purple">Browse Files</Button>
             </a>

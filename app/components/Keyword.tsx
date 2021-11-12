@@ -1,6 +1,6 @@
-import { Badge } from "@chakra-ui/layout";
-import {Link} from "react-router-dom";
-import React, { ReactElement } from "react";
+import { Badge } from '@chakra-ui/react';
+import { Link } from 'remix';
+import { ReactElement } from 'react';
 
 interface Props {
   item: string;

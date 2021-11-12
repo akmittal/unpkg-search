@@ -1,7 +1,7 @@
-import { Button } from "@chakra-ui/button";
-import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
+import { Button } from '@chakra-ui/button';
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/input';
 
-import React, { ReactElement } from "react";
+import React, { ReactElement } from 'react';
 
 interface Props {
  value:string;
@@ -9,7 +9,7 @@ interface Props {
  onSubmit:() => void
 }
 
-export default function Search({value, onChange, onSubmit}: Props): ReactElement {
+export default function Search({ value, onChange, onSubmit }: Props): ReactElement {
   return (
     <InputGroup size="lg">
       <Input
@@ -18,8 +18,8 @@ export default function Search({value, onChange, onSubmit}: Props): ReactElement
         placeholder="Search.."
         onChange={(e) => onChange(e.currentTarget.value)}
         onKeyPress={(e) => {
-          if (e.key === "Enter") {
-           onSubmit()
+          if (e.key === 'Enter') {
+            onSubmit();
           }
         }}
         value={value}
@@ -29,7 +29,7 @@ export default function Search({value, onChange, onSubmit}: Props): ReactElement
           h="2rem"
           size="lg"
           onClick={() => {
-           onSubmit()
+            onSubmit();
           }}
           colorScheme="purple"
         >

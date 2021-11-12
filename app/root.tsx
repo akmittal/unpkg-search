@@ -1,8 +1,9 @@
-import type { LinksFunction } from "remix";
-import { Meta, Links, Scripts, LiveReload, useCatch } from "remix";
-import { Outlet, useLocation } from "react-router-dom";
+import type { LinksFunction } from 'remix';
+import {
+  Meta, Links, Scripts, LiveReload, useCatch,
+} from 'remix';
+import { Outlet, useLocation } from 'react-router-dom';
 
-import stylesUrl from "./styles/globals.css";
 import {
   ChakraProvider,
   ColorMode,
@@ -10,25 +11,24 @@ import {
   Text,
   Heading,
   Stack,
-} from "@chakra-ui/react";
-import { extendTheme } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import Navbar from "./components/Navbar";
-import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
-import { useEffect } from "react";
+  extendTheme,
+} from '@chakra-ui/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { useEffect } from 'react';
 
-import Nprogress from "nprogress";
+import Nprogress from 'nprogress';
 
-import stylesUrl2 from "nprogress/nprogress.css";
+import stylesUrl2 from 'nprogress/nprogress.css';
+import { ColorModeSwitcher } from './components/ColorModeSwitcher';
+import Navbar from './components/Navbar';
+import stylesUrl from './styles/globals.css';
 
-export let links: LinksFunction = () => {
-  return [
-    { rel: "stylesheet", href: stylesUrl },
-    { rel: "stylesheet", href: stylesUrl2 },
-  ];
-};
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: stylesUrl },
+  { rel: 'stylesheet', href: stylesUrl2 },
+];
 
-const defaultMode: ColorMode = "dark";
+const defaultMode: ColorMode = 'dark';
 
 const config = {
   initialColorMode: defaultMode,
@@ -37,15 +37,15 @@ const config = {
 
 const colors = {
   brand: {
-    900: "#1a365d",
-    800: "#153e75",
-    700: "#2a69ac",
+    900: '#1a365d',
+    800: '#153e75',
+    700: '#2a69ac',
   },
 };
 const theme = extendTheme({ colors, config });
 const queryClient = new QueryClient();
 
-function Document({
+const Document = function ({
   children,
   title,
 }: {
@@ -65,15 +65,15 @@ function Document({
       <body>
         {children}
         <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        {process.env.NODE_ENV === 'development' && <LiveReload />}
       </body>
     </html>
   );
-}
+};
 
 export default function App() {
   const location = useLocation();
-    useEffect(() => {
+  useEffect(() => {
     Nprogress.done();
 
     return () => {
@@ -96,8 +96,8 @@ export default function App() {
   );
 }
 
-export function CatchBoundary() {
-  let caught = useCatch();
+export var CatchBoundary = function () {
+  const caught = useCatch();
 
   switch (caught.status) {
     case 401:
@@ -105,19 +105,21 @@ export function CatchBoundary() {
       return (
         <Document title={`${caught.status} ${caught.statusText}`}>
           <h1>
-            {caught.status} {caught.statusText}
+            {caught.status}
+            {' '}
+            {caught.statusText}
           </h1>
         </Document>
       );
 
     default:
       throw new Error(
-        `Unexpected caught response with status: ${caught.status}`
+        `Unexpected caught response with status: ${caught.status}`,
       );
   }
-}
+};
 
-export function ErrorBoundary({ error }: { error: Error }) {
+export var ErrorBoundary = function ({ error }: { error: Error }) {
   console.error(error);
 
   return (
@@ -136,4 +138,4 @@ export function ErrorBoundary({ error }: { error: Error }) {
       </QueryClientProvider>
     </Document>
   );
-}
+};
