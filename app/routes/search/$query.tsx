@@ -5,7 +5,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchResult from "../../components/SearchResult";
 import Search from "./../../components/Search";
-import { host } from "../../../util";
 import { MetaFunction, json } from "remix";
 
 import fetch from "node-fetch";

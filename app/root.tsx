@@ -2,8 +2,7 @@ import type { LinksFunction } from "remix";
 import { Meta, Links, Scripts, LiveReload, useCatch } from "remix";
 import { Outlet, useLocation } from "react-router-dom";
 
-import stylesUrl from "./styles/global.css";
-import stylesUrl2 from "./styles/globals.css";
+import stylesUrl from "./styles/globals.css";
 import {
   ChakraProvider,
   ColorMode,
@@ -20,13 +19,12 @@ import { useEffect } from "react";
 
 import Nprogress from "nprogress";
 
-import stylesUrl3 from "nprogress/nprogress.css";
+import stylesUrl2 from "nprogress/nprogress.css";
 
 export let links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: stylesUrl },
     { rel: "stylesheet", href: stylesUrl2 },
-    { rel: "stylesheet", href: stylesUrl3 },
   ];
 };
 
