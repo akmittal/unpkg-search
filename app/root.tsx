@@ -1,11 +1,5 @@
-import type { LinksFunction, LoaderFunction } from "remix";
-import {
-  Meta,
-  Links,
-  Scripts,
-  LiveReload,
-  useCatch,
-} from "remix";
+import type { LinksFunction } from "remix";
+import { Meta, Links, Scripts, LiveReload, useCatch } from "remix";
 import { Outlet, useLocation } from "react-router-dom";
 
 import stylesUrl from "./styles/global.css";
@@ -16,10 +10,10 @@ import {
   Flex,
   Text,
   Heading,
-Stack
+  Stack,
 } from "@chakra-ui/react";
 import { extendTheme } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider, } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Navbar from "./components/Navbar";
 import { ColorModeSwitcher } from "./components/ColorModeSwitcher";
 import { useEffect } from "react";
@@ -34,10 +28,6 @@ export let links: LinksFunction = () => {
     { rel: "stylesheet", href: stylesUrl2 },
     { rel: "stylesheet", href: stylesUrl3 },
   ];
-};
-
-export let loader: LoaderFunction = async () => {
-  return { date: new Date() };
 };
 
 const defaultMode: ColorMode = "dark";
@@ -82,15 +72,15 @@ function Document({
   );
 }
 
-export default function App() { 
+export default function App() {
   const location = useLocation();
-  useEffect(() => {
-   Nprogress.done()
+    useEffect(() => {
+    Nprogress.done();
 
     return () => {
-      Nprogress.start()
+      Nprogress.start();
     };
-},[location.pathname]);
+  }, [location.pathname]);
 
   return (
     <Document>
@@ -140,8 +130,8 @@ export function ErrorBoundary({ error }: { error: Error }) {
             <ColorModeSwitcher />
           </Flex>
           <Stack alignItems="center">
-          <Heading>App Error</Heading>
-          <Text>Page you are looking for could not be found</Text>
+            <Heading>App Error</Heading>
+            <Text>Page you are looking for could not be found</Text>
           </Stack>
         </ChakraProvider>
       </QueryClientProvider>

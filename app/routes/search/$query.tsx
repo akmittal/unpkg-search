@@ -86,7 +86,6 @@ export const loader: LoaderFunction = async ({ params }) => {
       },
     }
   );
-  console.log({res})
   const data = await res.json();
   const pathPromises = [];
   for (const result of data.objects) {

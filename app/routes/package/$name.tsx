@@ -164,7 +164,6 @@ async function getPackageInfo(packagename: string) {
     },
   });
   const data = await res.json();
-  console.log({ssss: res.status});
   if(data.status === 404) {
     throw new Error("package not found");
   }
