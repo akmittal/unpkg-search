@@ -1,6 +1,6 @@
 import type { LinksFunction } from 'remix';
 import {
-  Meta, Links, Scripts, LiveReload, useCatch,
+  Meta, Links, Scripts, LiveReload, useCatch, useTransition,
 } from 'remix';
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -72,14 +72,15 @@ const Document = function ({
 };
 
 export default function App() {
-  const location = useLocation();
-  useEffect(() => {
-    Nprogress.done();
+  const transition = useTransition();
 
-    return () => {
+  useEffect(() => {
+    if (transition.state === 'loading' || transition.state === 'submitting') {
       Nprogress.start();
-    };
-  }, [location.pathname]);
+    } else {
+      Nprogress.done();
+    }
+  }, [transition.state]);
 
   return (
     <Document>
