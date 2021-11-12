@@ -17,7 +17,7 @@ export let meta: MetaFunction = ({ data, params }) => {
   const { name } = params;
   return {
     title: `${name} - Best place to find CDN for developers`,
-    // description: data.description,
+    description: data.description,
     "og:image": "/logo.png",
     "theme-color": "#d9643a",
   };
