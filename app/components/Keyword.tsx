@@ -1,6 +1,6 @@
-import { Badge } from "@chakra-ui/layout";
-import Link from "next/link";
-import React, { ReactElement } from "react";
+import { Badge } from '@chakra-ui/react';
+import { Link } from 'remix';
+import { ReactElement } from 'react';
 
 interface Props {
   item: string;
@@ -8,7 +8,7 @@ interface Props {
 
 export default function Keyword({ item }: Props): ReactElement {
   return (
-    <Link href={`/search/keywords:${item}`} passHref={true}>
+    <Link to={`/search/keywords:${item}`}>
       <a>
         <Badge
           colorScheme="purple"

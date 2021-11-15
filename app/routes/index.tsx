@@ -1,11 +1,36 @@
 import { Flex, Heading } from "@chakra-ui/layout";
-import Head from "next/head";
-import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import KeywordCard from "../components/KeywordCard";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/home.css";
 import Search from "./../components/Search";
-import { FaCode, FaTerminal, FaCheck, FaMobile, FaRobot, FaSquare, FaCss3, FaServer, FaFile, FaNetworkWired, FaShieldAlt, FaCrop ,FaSquareRootAlt} from "react-icons/fa";
+import {
+  FaCode,
+  FaTerminal,
+  FaCheck,
+  FaMobile,
+  FaRobot,
+  FaCss3,
+  FaServer,
+  FaFile,
+  FaNetworkWired,
+  FaShieldAlt,
+  FaCrop,
+  FaSquareRootAlt,
+} from "react-icons/fa";
+import type { MetaFunction, LinksFunction } from "remix";
+
+export let links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: styles }];
+};
+
+export let meta: MetaFunction = () => {
+  return {
+    title: "UNPKG Search",
+    description: "Search for packages on UNPKG",
+    keywords: "unpkg search, unpkg, search, CDN, npm, github, package search,",
+  };
+};
 
 const discover = [
   { icon: FaCode, label: "Front End", keyword: "front-end" },
@@ -24,38 +49,32 @@ const discover = [
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const router = useRouter();
+  const navigate = useNavigate();
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>UNPKG Search</title>
-        <link rel="icon" href="/favicon.png" />
-        <meta name="description" content="Search for packages on UNPKG " />
-        <meta
-          name="keywords"
-          content="unpkg search, unpkg, search, CDN, npm, github, package search,"
-        />
-      </Head>
-
-      <main className={styles.main}>
+    <div className="container">
+      <main className="main">
         <Search
-          onSubmit={() =>
-            router.push(`/search/${search}`, undefined, { shallow: false })
-          }
+          onSubmit={() => navigate(`/search/${search}`)}
           value={search}
           onChange={(value) => {
             setSearch(value);
           }}
         />
-       
-       
       </main>
-      <Heading size="lg" mb="4">Discover Packages</Heading>
-      <Flex gridGap="2" direction="row" mb="4" flexWrap="wrap" justifyContent="center" width="50%" maxW="400px">
-        
+      <Heading size="lg" mb="4">
+        Discover Packages
+      </Heading>
+      <Flex
+        gridGap="2"
+        direction="row"
+        mb="4"
+        flexWrap="wrap"
+        justifyContent="center"
+        width="50%"
+        maxW="400px"
+      >
         {discover.map((item) => (
-          
           <KeywordCard
             icon={item.icon}
             keyword={item.keyword}
