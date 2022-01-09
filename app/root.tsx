@@ -1,8 +1,13 @@
-import type { LinksFunction } from 'remix';
+import type { LinksFunction } from "remix";
 import {
-  Meta, Links, Scripts, LiveReload, useCatch, useTransition,
-} from 'remix';
-import { Outlet, useLocation } from 'react-router-dom';
+  Meta,
+  Links,
+  Scripts,
+  LiveReload,
+  useCatch,
+  useTransition,
+} from "remix";
+import { Outlet } from "react-router-dom";
 
 import {
   ChakraProvider,
@@ -12,23 +17,23 @@ import {
   Heading,
   Stack,
   extendTheme,
-} from '@chakra-ui/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { useEffect } from 'react';
+} from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import React, { useEffect } from "react";
 
-import Nprogress from 'nprogress';
+import Nprogress from "nprogress";
 
-import stylesUrl2 from 'nprogress/nprogress.css';
-import { ColorModeSwitcher } from './components/ColorModeSwitcher';
-import Navbar from './components/Navbar';
-import stylesUrl from './styles/globals.css';
+import stylesUrl2 from "nprogress/nprogress.css";
+import ColorModeSwitcher from "./components/ColorModeSwitcher";
+import Navbar from "./components/Navbar";
+import stylesUrl from "./styles/globals.css";
 
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: stylesUrl },
-  { rel: 'stylesheet', href: stylesUrl2 },
+  { rel: "stylesheet", href: stylesUrl },
+  { rel: "stylesheet", href: stylesUrl2 },
 ];
 
-const defaultMode: ColorMode = 'dark';
+const defaultMode: ColorMode = "dark";
 
 const config = {
   initialColorMode: defaultMode,
@@ -37,21 +42,30 @@ const config = {
 
 const colors = {
   brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
+    900: "#1a365d",
+    800: "#153e75",
+    700: "#2a69ac",
   },
 };
 const theme = extendTheme({ colors, config });
 const queryClient = new QueryClient();
 
-const Document = function ({
+const Document = function Document({
   children,
   title,
 }: {
   children: React.ReactNode;
   title?: string;
 }) {
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-4VP66JXRFK");
+  });
   return (
     <html lang="en">
       <head>
@@ -65,8 +79,12 @@ const Document = function ({
       <body>
         {children}
         <Scripts />
-        {process.env.NODE_ENV === 'development' && <LiveReload />}
+        {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-4VP66JXRFK"
+      ></script>
     </html>
   );
 };
@@ -75,7 +93,7 @@ export default function App() {
   const transition = useTransition();
 
   useEffect(() => {
-    if (transition.state === 'loading' || transition.state === 'submitting') {
+    if (transition.state === "loading" || transition.state === "submitting") {
       Nprogress.start();
     } else {
       Nprogress.done();
@@ -97,7 +115,7 @@ export default function App() {
   );
 }
 
-export var CatchBoundary = function () {
+export const CatchBoundary = function () {
   const caught = useCatch();
 
   switch (caught.status) {
@@ -106,21 +124,19 @@ export var CatchBoundary = function () {
       return (
         <Document title={`${caught.status} ${caught.statusText}`}>
           <h1>
-            {caught.status}
-            {' '}
-            {caught.statusText}
+            {caught.status} {caught.statusText}
           </h1>
         </Document>
       );
 
     default:
       throw new Error(
-        `Unexpected caught response with status: ${caught.status}`,
+        `Unexpected caught response with status: ${caught.status}`
       );
   }
 };
 
-export var ErrorBoundary = function ({ error }: { error: Error }) {
+export const ErrorBoundary = function ({ error }: { error: Error }) {
   console.error(error);
 
   return (

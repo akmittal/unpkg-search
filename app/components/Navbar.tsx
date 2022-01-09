@@ -1,8 +1,8 @@
-import { Box, Flex } from '@chakra-ui/layout';
-import { ReactElement } from 'react';
+import { Box, Flex } from '@chakra-ui/react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Navbar(): ReactElement {
+const Navbar = function Navbar(): ReactElement {
   return (
     <Flex justifyContent="center">
       <Link to="/">
@@ -19,4 +19,6 @@ export default function Navbar(): ReactElement {
       </Link>
     </Flex>
   );
-}
+};
+
+export default Navbar;
