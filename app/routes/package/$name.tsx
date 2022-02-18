@@ -49,8 +49,8 @@ export default function Query() {
       </Box>
 
       <VStack alignItems="flex-start" p="5">
-        <Heading>{name}</Heading>
-        <Flex>{data.description}</Flex>
+        <Heading as="h1">{name}</Heading>
+        <Flex as="p">{data.description}</Flex>
         <Flex>
           <Select
             placeholder="Select version"
