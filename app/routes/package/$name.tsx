@@ -50,7 +50,7 @@ export default function Query() {
 
       <VStack alignItems="flex-start" p="5">
         <Heading as="h1">{name}</Heading>
-        <Flex as="p">{data.description}</Flex>
+        <Flex as="h3">{data.description}</Flex>
         <Flex>
           <Select
             placeholder="Select version"
