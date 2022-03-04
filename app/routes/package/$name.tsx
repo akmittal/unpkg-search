@@ -27,6 +27,12 @@ export const meta: MetaFunction = ({ data, params }) => {
   };
 };
 
+export function headers() {
+  return {
+    'cache-control': 'max-age=604800, stale-while-revalidate=86400',
+  };
+}
+
 export default function Query() {
   const initialData = useLoaderData();
   const navigate = useNavigate();
