@@ -1,6 +1,7 @@
 import { Box, Flex, Heading } from '@chakra-ui/layout';
 import { ReactElement, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import {Link} from "remix";
 import { Button, IconButton } from '@chakra-ui/button';
 import { CopyIcon } from '@chakra-ui/icons';
 import { Link as ChakraLink, Tooltip } from '@chakra-ui/react';

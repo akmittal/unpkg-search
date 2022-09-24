@@ -1,9 +1,9 @@
 import { Box } from '@chakra-ui/layout';
 
 import {
-  LoaderFunction, useLoaderData, MetaFunction, json,
+  LoaderFunction, useLoaderData, MetaFunction, json, useNavigate, useSearchParams
 } from 'remix';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+// import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import fetch from 'node-fetch';
 import SearchResult from '../../components/SearchResult';

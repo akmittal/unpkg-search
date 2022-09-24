@@ -1,5 +1,5 @@
 import { Flex, Heading } from '@chakra-ui/layout';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   FaCode,
@@ -16,6 +16,7 @@ import {
   FaSquareRootAlt,
 } from 'react-icons/fa';
 import type { MetaFunction, LinksFunction } from 'remix';
+import { useNavigate } from 'remix';
 import KeywordCard from '../components/KeywordCard';
 import styles from '../styles/home.css';
 import Search from '../components/Search';
